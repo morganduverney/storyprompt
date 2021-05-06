@@ -38,13 +38,18 @@ class AddStoryPromptViewController: UIViewController {
     }
   }
   
+  deinit {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     numberSlider.value = 7.5
     storyPromptEntry.number = Int(numberSlider.value)
+    NotificationCenter.default.addObserver(self, selector: #selector(updateStoryPrompt), name: UIResponder.keyboardDidHideNotification, object: nil)
   }
   
-  func updateStoryPrompt() {
+  @objc func updateStoryPrompt() {
     storyPromptEntry.noun = nounTextField.text ?? ""
     storyPromptEntry.adjective = adjectiveTextField.text ?? ""
     storyPromptEntry.verb = verbTextField.text ?? ""
@@ -54,6 +59,7 @@ class AddStoryPromptViewController: UIViewController {
     if segue.identifier == "StoryPrompt" {
       guard let storyPromptViewController = segue.destination as? StoryPromptViewController else { return }
       storyPromptViewController.storyPromptEntry = storyPromptEntry
+      storyPromptViewController.isNewStoryPrompt = true
     }
   }
 }
