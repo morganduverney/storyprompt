@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  StoryPrompt
 //
-//  Created by Morgan Edmonds on 5/4/21.
+//  Created by Morgan Duverney on 5/4/21.
 //
 
 import UIKit
